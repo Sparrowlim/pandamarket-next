@@ -4,14 +4,6 @@ import { Articles, OrderBy, Post } from "../../../types/articleTypes";
 import PostFeed from "./PostFeed";
 import DropDownMenu from "../components/DropdownMenu";
 
-export async function getStaticProps() {
-  const response: Articles = await getArticle("recent", 10);
-  return {
-    props: {
-      initialArticle: response,
-    },
-  };
-}
 interface AllPostProps {
   initialArticle: Articles;
 }

@@ -4,14 +4,6 @@ import { getArticle } from "../../api/api";
 import PostCard from "./PostCard";
 import useBreakPoint from "../../../hooks/useBreakPoint";
 
-export async function getStaticProps() {
-  const response: Articles = await getArticle("like", 3);
-  return {
-    props: {
-      initialArticle: response,
-    },
-  };
-}
 interface BestPostsProps {
   initialArticle: Articles;
 }
