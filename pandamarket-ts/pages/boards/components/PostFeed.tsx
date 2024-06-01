@@ -1,4 +1,5 @@
-import { Post } from "@/types/articleTypes";
+import { getArticle } from "@/pages/api/api";
+import { Articles, Post } from "@/types/articleTypes";
 import { formatDate } from "@/utils/utils";
 
 import React from "react";
@@ -9,7 +10,8 @@ interface PostFeedProps {
 
 const PostFeed: React.FC<PostFeedProps> = ({ article }) => {
   const dateObject = new Date(article.createdAt);
-  const date = formatDate(dateObject);
+  let date = "";
+  date = formatDate(dateObject);
   return (
     <>
       <div>

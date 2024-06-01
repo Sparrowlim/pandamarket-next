@@ -3,8 +3,21 @@ import { getArticle } from "../../api/api";
 import { Articles, OrderBy, Post } from "../../../types/articleTypes";
 import PostFeed from "./PostFeed";
 import DropDownMenu from "../components/DropdownMenu";
-const AllPost = () => {
-  const [article, setArticle] = useState<Articles | null>(null);
+
+export async function getStaticProps() {
+  const response: Articles = await getArticle("recent", 10);
+  return {
+    props: {
+      initialArticle: response,
+    },
+  };
+}
+interface AllPostProps {
+  initialArticle: Articles;
+}
+
+const AllPost = ({ initialArticle }: AllPostProps) => {
+  const [article, setArticle] = useState<Articles | null>(initialArticle);
   const [error, setError] = useState<string | null>(null);
   const [orderBy, setOrderBy] = useState<OrderBy>("recent");
   const [searchText, setSearchText] = useState("");

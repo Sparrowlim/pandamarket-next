@@ -8,7 +8,8 @@ interface PostCardProps {
 
 const PostCard: React.FC<PostCardProps> = ({ article }) => {
   const dateObject = new Date(article.createdAt);
-  const date = formatDate(dateObject);
+  let date = "";
+  date = formatDate(dateObject);
   return (
     <>
       <div>{article.title}</div>

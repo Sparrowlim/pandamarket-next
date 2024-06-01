@@ -3,12 +3,24 @@ import { Articles } from "../../../types/articleTypes";
 import { getArticle } from "../../api/api";
 import PostCard from "./PostCard";
 import useBreakPoint from "../../../hooks/useBreakPoint";
-const BestPosts = () => {
-  const [article, setArticle] = useState<Articles | null>(null);
+
+export async function getStaticProps() {
+  const response: Articles = await getArticle("like", 3);
+  return {
+    props: {
+      initialArticle: response,
+    },
+  };
+}
+interface BestPostsProps {
+  initialArticle: Articles;
+}
+
+const BestPosts = ({ initialArticle }: BestPostsProps) => {
+  const [article, setArticle] = useState<Articles | null>(initialArticle);
   const [error, setError] = useState<string | null>(null);
   const breakPoint = useBreakPoint();
   const articleList = article ? article.list : [];
-  let pageSize = 0;
 
   const getPageSize = () => {
     if (breakPoint.isDesktop) return 3;
