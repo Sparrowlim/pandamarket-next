@@ -1,4 +1,4 @@
-import { BreakPoint, OrderBy } from "../../types/articleTypes";
+import { OrderBy } from "../../types/articleTypes";
 
 const BASEURL = "https://panda-market-api.vercel.app";
 

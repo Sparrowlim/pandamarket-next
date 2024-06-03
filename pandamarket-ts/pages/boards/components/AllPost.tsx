@@ -40,7 +40,6 @@ const AllPost = ({ initialArticle }: AllPostProps) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
-  console.log(searchText);
   return (
     <>
       <h1>게시글</h1>

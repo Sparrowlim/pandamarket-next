@@ -8,22 +8,21 @@ interface BestPostsProps {
   initialArticle: Articles;
 }
 
+const pageSizeMap = {
+  desktop: 3,
+  tablet: 2,
+  mobile: 1,
+};
+
 const BestPosts = ({ initialArticle }: BestPostsProps) => {
   const [article, setArticle] = useState<Articles | null>(initialArticle);
   const [error, setError] = useState<string | null>(null);
-  const breakPoint = useBreakPoint();
+  const { device } = useBreakPoint();
   const articleList = article ? article.list : [];
-
-  const getPageSize = () => {
-    if (breakPoint.isDesktop) return 3;
-    if (breakPoint.isTablet) return 2;
-    if (breakPoint.isMobile) return 1;
-    return 0;
-  };
 
   useEffect(() => {
     async function fetchArticle() {
-      const pageSize = getPageSize();
+      const pageSize = pageSizeMap[device];
       if (pageSize === 0) return;
       try {
         const response: Articles = await getArticle("like", pageSize);
@@ -40,20 +39,19 @@ const BestPosts = ({ initialArticle }: BestPostsProps) => {
       }
     }
     fetchArticle();
-  }, [breakPoint.isMobile, breakPoint.isTablet, breakPoint.isDesktop]);
+  }, [device]);
 
   useEffect(() => {});
 
   // if (error) {
   //   alert(`오류: ${error}`);
   // }
-  console.log(article);
   return (
     <>
       <h1>베스트 게시글</h1>
-      {articleList.map((article) => (
-        <PostCard key={article.id} article={article} />
-      ))}
+      {articleList.map(
+        (article) => article && <PostCard key={article.id} article={article} />
+      )}
     </>
   );
 };

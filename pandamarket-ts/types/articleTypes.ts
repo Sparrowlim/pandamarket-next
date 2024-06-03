@@ -9,8 +9,8 @@ export interface Post {
   content: string;
   image: string | null;
   likeCount: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   writer: Writer;
 }
 
@@ -20,9 +20,3 @@ export interface Articles {
 }
 
 export type OrderBy = "like" | "recent";
-
-export interface BreakPoint {
-  isDesktop: boolean;
-  isTablet: boolean;
-  isMobile: boolean;
-}
