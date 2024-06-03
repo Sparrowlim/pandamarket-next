@@ -7,19 +7,30 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ article }) => {
-  const dateObject = new Date(article.createdAt);
   let date = "";
-  date = formatDate(dateObject);
+  if (article?.createdAt) {
+    const dateObject = new Date(article.createdAt ?? "");
+    date = formatDate(dateObject);
+  }
   return (
     <>
-      <div>{article.title}</div>
-      {article.image && (
-        <img src={article.image} alt={article.title} width={48} height={45} />
+      {article && (
+        <>
+          <div>{article.title}</div>
+          {article.image && (
+            <img
+              src={article.image}
+              alt={article.title}
+              width={48}
+              height={45}
+            />
+          )}
+          <div>{article.writer.nickname}</div>
+          <div>{article.likeCount}</div>
+          <div>{date}</div>
+          <hr />
+        </>
       )}
-      <div>{article.writer.nickname}</div>
-      <div>{article.likeCount}</div>
-      <div>{date}</div>
-      <hr />
     </>
   );
 };
