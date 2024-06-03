@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
 import BestPosts from "./components/BestPosts";
 import AllPost from "./components/AllPost";
 import { getArticle } from "../api/api";
 import { Articles } from "@/types/articleTypes";
-import { init } from "next/dist/compiled/webpack/webpack";
 
 export async function getStaticProps() {
   const bestPosts: Articles = await getArticle("recent", 3);
@@ -16,14 +14,17 @@ export async function getStaticProps() {
   };
 }
 interface IndexProps {
-  initialBestPosts: Articles;
-  initialAllPosts: Articles;
+  initialBestArticle: Articles;
+  initialAllArticle: Articles;
 }
-const index: React.FC<IndexProps> = ({ initialBestPosts, initialAllPosts }) => {
+const index: React.FC<IndexProps> = ({
+  initialAllArticle,
+  initialBestArticle,
+}) => {
   return (
     <>
-      <BestPosts initialArticle={initialBestPosts} />
-      <AllPost initialArticle={initialAllPosts} />
+      <BestPosts initialArticle={initialBestArticle} />
+      <AllPost initialArticle={initialAllArticle} />
     </>
   );
 };
