@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { getArticle } from "../../api/api";
+import { getArticle } from "@/api/api";
 import { Articles, OrderBy, Post } from "../../../types/articleTypes";
 import PostFeed from "./PostFeed";
 import DropDownMenu from "../components/DropdownMenu";
